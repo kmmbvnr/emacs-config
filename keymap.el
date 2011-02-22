@@ -1,5 +1,6 @@
 ;; Keyboard shortcuts
 (global-set-key "\C-x\C-b" 'ibuffer)
+(global-set-key "\C-c\M-g" 'magit-status)
 
 
 ;; Customized keybinding
@@ -21,3 +22,8 @@
 (global-set-key [(shift f2)] 'bm-previous)
 (global-set-key [(control shift f2)] 'bm-show)
 
+;; Ergo movement
+(global-set-key "\M-j" 'backward-char)
+(global-set-key "\M-l" 'forward-char)
+(global-set-key "\M-i" 'previous-line)
+(global-set-key "\M-k" 'next-line)

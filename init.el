@@ -45,17 +45,18 @@
 	    (goto-char (point-max))
 	    (insert "\nCongrats, el-get is installed and ready to serve!"))))))
 
-(setq el-get-sources '(color-theme bm hideshowvis fold-dwim tabbar))
+(setq el-get-sources '(color-theme bm hideshowvis fold-dwim tabbar magit))
 
 (el-get 'sync)
 (el-get 'wait)
+
+(load (concat config-dir "session.el"))
 
 ;; customize
 (setq custom-file (concat config-dir "custom.el"))
 (load-file custom-file)
 
 ;; load subconfigs
-(load (concat config-dir "session.el"))
 (load (concat config-dir "look-and-feel.el"))
 (load (concat config-dir "python.el"))
 (load (concat config-dir "keymap.el"))
