@@ -62,9 +62,16 @@
 					     (mode . c-mode)
 					     (mode . perl-mode)
 					     (mode . python-mode)
+					     (mode . django-mode)
 					     (mode . java-mode)
 					     (mode . emacs-lisp-mode)
 					     ;; etc
+					     ))
+					   ("Web"
+					    (or
+					     (mode . html-mode)
+					     (mode . css-mode)
+					     (mode . js-mode)
 					     ))))))
 (add-hook 'ibuffer-mode-hook
   (lambda ()
@@ -131,6 +138,13 @@
       (lambda () 
         (list (cond
                ((find (aref (buffer-name (current-buffer)) 0) " *") "*")
+	       ((or (eq major-mode 'html-mode) 
+		    (eq major-mode 'css-mode)
+		    (eq major-mode 'js-mode))
+		"Web")
+	       ((or (eq major-mode 'python-mode)
+		    (eq major-mode 'django-mode))
+	        "Python")
                (t (if (and (stringp mode-name)
                            ;; Take care of preserving the match-data
                            ;; because this function is called when
@@ -138,3 +152,24 @@
                            (save-match-data (string-match "[^ ]" mode-name)))
                       mode-name
                     (symbol-name major-mode)))))))
+
+;; add a buffer modification state indicator in the tab label,
+ ;; and place a space around the label to make it looks less crowd
+(defadvice tabbar-buffer-tab-label (after fixup_tab_label_space_and_flag activate)
+  (setq ad-return-value
+	(if (and (buffer-modified-p (tabbar-tab-value tab))
+		 (buffer-file-name (tabbar-tab-value tab)))
+	    (concat " + " (concat ad-return-value " "))
+	  (concat " " (concat ad-return-value " ")))))
+;; called each time the modification state of the buffer changed
+(defun ztl-modification-state-change ()
+  (tabbar-set-template tabbar-current-tabset nil)
+  (tabbar-display-update))
+;; first-change-hook is called BEFORE the change is made
+(defun ztl-on-buffer-modification ()
+  (set-buffer-modified-p t)
+  (ztl-modification-state-change))
+(add-hook 'after-save-hook 'ztl-modification-state-change)
+;; this doesn't work for revert, I don't know
+;;(add-hook 'after-revert-hook 'ztl-modification-state-change)
+(add-hook 'first-change-hook 'ztl-on-buffer-modification)

@@ -45,7 +45,10 @@
 	    (goto-char (point-max))
 	    (insert "\nCongrats, el-get is installed and ready to serve!"))))))
 
-(setq el-get-sources '(color-theme bm hideshowvis fold-dwim tabbar magit))
+(setq el-get-sources 
+      '(color-theme bm hideshowvis fold-dwim tabbar 
+		    magit pymacs python-mode django-mode
+		    js2-mode))
 
 (el-get 'sync)
 (el-get 'wait)
@@ -59,6 +62,7 @@
 ;; load subconfigs
 (load (concat config-dir "look-and-feel.el"))
 (load (concat config-dir "python.el"))
+(load (concat config-dir "javascript.el"))
 (load (concat config-dir "keymap.el"))
 
 ;; autoinsert

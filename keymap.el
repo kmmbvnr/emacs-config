@@ -16,6 +16,7 @@
 (global-set-key (kbd "<s-left>") `tabbar-backward-tab)
 (global-set-key (kbd "<s-up>") `tabbar-forward-group)
 (global-set-key (kbd "<s-down>") `tabbar-backward-group)
+(global-set-key (kbd "<kp-enter>") `tabbar-press-home)
 
 (global-set-key [C-f2]  'bm-toggle)
 (global-set-key [(f2)]   'bm-next)
