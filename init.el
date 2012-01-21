@@ -7,7 +7,8 @@
 
 ;; as soon as possible
 (tool-bar-mode -1)
-;;(menu-bar-mode -1)
+(unless window-system
+    (menu-bar-mode -1))
 (scroll-bar-mode nil)
 
 ;; Automatically compile the init files
@@ -24,6 +25,9 @@
   (list 
    (concat config-dir "recipes")
    (concat el-get-dir "el-get/recipes/")))
+
+(add-to-list 'load-path "~/.emacs.d/elisp/el-get/")
+(add-to-list 'load-path "~/.emacs.d/elisp/python-mode/")
 
 (let* ((package "el-get")
        (el-get-path (concat el-get-dir package "/el-get.el")))
@@ -48,7 +52,7 @@
 (setq el-get-sources 
       '(color-theme bm hideshowvis fold-dwim tabbar 
 		    magit pymacs python-mode django-mode
-		    js2-mode))
+		    js2-mode go-mode smex))
 
 (el-get 'sync)
 (el-get 'wait)
@@ -61,6 +65,7 @@
 
 ;; load subconfigs
 (load (concat config-dir "look-and-feel.el"))
+(load (concat config-dir "compile.el"))
 (load (concat config-dir "python.el"))
 (load (concat config-dir "javascript.el"))
 (load (concat config-dir "keymap.el"))

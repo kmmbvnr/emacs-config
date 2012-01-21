@@ -65,6 +65,7 @@
 					     (mode . django-mode)
 					     (mode . java-mode)
 					     (mode . emacs-lisp-mode)
+					     (mode . go-mode)
 					     ;; etc
 					     ))
 					   ("Web"
