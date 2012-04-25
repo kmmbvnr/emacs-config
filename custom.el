@@ -1,8 +1,9 @@
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ahs-idle-interval 0.5)
  '(android-mode-avd "Android8")
  '(android-mode-sdk-dir "~/Projects/wthr.cc/android/sdk")
  '(apropos-do-all t)
@@ -60,11 +61,12 @@
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
  '(winner-mode t nil (winner)))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "beige" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 101 :width normal :foundry "unknown" :family "Liberation Mono"))))
+ '(ahs-face ((t (:background "Orange1" :foreground "black"))))
  '(js2-error-face ((((class color) (background light)) (:background "LightPink"))))
  '(js2-external-variable-face ((t (:background "LightBlue2"))))
  '(js2-warning-face ((((class color) (background light)) (:background "LightBlue2"))))

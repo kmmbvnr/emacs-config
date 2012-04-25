@@ -14,6 +14,7 @@
 (global-set-key "\C-c\M-c" 'clone-indirect-buffer)
 (global-set-key "\C-c\M-t" 'toggle-truncate-lines)
 
+(require 'fold-dwim)
 (global-set-key [(control tab)] 'fold-dwim-toggle)
 
 (global-set-key (kbd "<s-right>") `tabbar-forward-tab)
