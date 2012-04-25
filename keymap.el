@@ -5,7 +5,6 @@
 
 ;; Customized keybinding
 (windmove-default-keybindings)
-
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;; This is your old M-x.
@@ -28,10 +27,5 @@
 (global-set-key [(shift f2)] 'bm-previous)
 (global-set-key [(control shift f2)] 'bm-show)
 (global-set-key [(f5)] 'compile)
-
-
-;; Ergo movement
-(global-set-key "\M-j" 'backward-char)
-(global-set-key "\M-l" 'forward-char)
-(global-set-key "\M-i" 'previous-line)
-(global-set-key "\M-k" 'next-line)
+(global-set-key [(f3)] 'flymake-goto-next-error)
+(global-set-key (kbd "C-c d") 'nav-right)

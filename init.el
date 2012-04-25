@@ -1,76 +1,68 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; GNU Emacs configuration
-;; (c) Mikhail Podgurskiy 2008-2010
+;; (c) Mikhail Podgurskiy 2008-2012
 ;; kmmbvnr AT gmail.com
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar config-dir (file-name-directory load-file-name))
 
-;; as soon as possible
+;; disable some stuff
 (tool-bar-mode -1)
 (unless window-system
     (menu-bar-mode -1))
-(scroll-bar-mode nil)
+(scroll-bar-mode -1)
+(remove-hook 'find-file-hooks 'vc-find-file-hook)
 
-;; Automatically compile the init files
+;; Automatically compile init files
 (defun byte-compile-init-file ()
-  (when (equal 0 (string-match config-dir 
-			       (file-name-directory buffer-file-name)))
+  (when (and 
+         (equal ".el" (substring buffer-file-name -3))
+         (equal 0 (string-match config-dir (file-name-directory buffer-file-name))))
     (byte-compile-file buffer-file-name)))
 (add-hook 'after-save-hook 'byte-compile-init-file)
 
-;; el-get installation
-(defvar elisp-dir (concat  (file-name-directory load-file-name) "elisp/"))
-(defvar el-get-dir elisp-dir)
-(defvar el-get-recipe-path
-  (list 
-   (concat config-dir "recipes")
-   (concat el-get-dir "el-get/recipes/")))
 
-(add-to-list 'load-path "~/.emacs.d/elisp/el-get/")
-(add-to-list 'load-path "~/.emacs.d/elisp/python-mode/")
+;; Repositories
+(require 'package)
+(setq package-user-dir (concat config-dir "elpa"))
+(add-to-list 'package-archives
+             '("elpa" . "http://tromey.com/elpa/"))
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
 
-(let* ((package "el-get")
-       (el-get-path (concat el-get-dir package "/el-get.el")))
-  (if (not (load el-get-path t))
-      (let* ((dummy (unless (file-directory-p el-get-dir)
-		      (make-directory el-get-dir t)))
-	     (bname "*el-get bootstrap*")
-	     (git (or (executable-find "git") (error "Unable to find `git'")))
-	     (url "git://github.com/dimitri/el-get.git")
-	     (el-get-sources `((:name ,package :type "git" :url ,url :features el-get :compile "el-get.el")))
-	     (default-directory el-get-dir)
-	     (process-connection-type nil) ; pipe, no pty (--no-progress)
-	     (status  (call-process git nil bname t "--no-pager" "clone" "-v" url package)))
-	(set-window-buffer (selected-window) bname)
-	(when (eq 0 status)
-	  (load el-get-path)
-	  (el-get-init "el-get")
-	  (with-current-buffer bname
-	    (goto-char (point-max))
-	    (insert "\nCongrats, el-get is installed and ready to serve!"))))))
+(defvar my-packages '(bm 
+                      tabbar 
+                      smex 
+                      color-theme
+                      dired-single
+                      fold-dwim
+                      pony-mode
+                      go-mode))
 
-(setq el-get-sources 
-      '(color-theme bm hideshowvis fold-dwim tabbar 
-		    magit pymacs python-mode django-mode
-		    js2-mode go-mode smex))
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
 
-(el-get 'sync)
-(el-get 'wait)
+
+;; Package initialization
+(require 'color-theme)
+(require 'fold-dwim)
+(require 'smex)
+(smex-initialize)
+
 
 (load (concat config-dir "session.el"))
+(load (concat config-dir "elisp/inhibit-clash-detection.el"))
+(load (concat config-dir "elisp/auto-highlight-symbol.el"))
 
-;; customize
+;; Customization
 (setq custom-file (concat config-dir "custom.el"))
 (load-file custom-file)
 
-;; load subconfigs
+;; Load subconfigs
 (load (concat config-dir "look-and-feel.el"))
 (load (concat config-dir "compile.el"))
 (load (concat config-dir "python.el"))
-(load (concat config-dir "javascript.el"))
 (load (concat config-dir "keymap.el"))
+(load (concat config-dir "email.el"))
 
-;; autoinsert
-(require 'autoinsert)
-(setq auto-insert-directory (concat config-dir "templates"))
-(setq auto-insert-query nil)

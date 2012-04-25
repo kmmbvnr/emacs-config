@@ -27,3 +27,5 @@
 (setq auto-save-list-file-prefix
       (concat local-saves-dir "saves-"))
 
+;; smex
+(setq smex-save-file (concat local-saves-dir "smex-items"))

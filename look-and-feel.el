@@ -82,7 +82,6 @@
 
 
 ;; Color theme
-(color-theme-initialize)
 (if window-system (color-theme-greiner) ;(color-theme-snow)
   (color-theme-arjen))
 
@@ -98,6 +97,7 @@
 
 (defadvice goto-line (after expand-after-goto-linex
                             activate compile)
+  (require 'hideshow)
   (save-excursion
     (hs-show-block)))
 (define-fringe-bitmap 'hs-marker [0 24 24 126 126 24 24 0])
@@ -174,3 +174,43 @@
 ;; this doesn't work for revert, I don't know
 ;;(add-hook 'after-revert-hook 'ztl-modification-state-change)
 (add-hook 'first-change-hook 'ztl-on-buffer-modification)
+
+
+;; Do not load vc backends automaticall
+(eval-after-load "vc" '(remove-hook 'find-file-hooks 'vc-find-file-hook))
+(require 'dired-single)
+(defun my-dired-init ()
+  "Bunch of stuff to run for dired, either immediately or when it's
+        loaded."
+  ;; <add other stuff here>
+  (define-key dired-mode-map [return] 'dired-single-buffer)
+  (define-key dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
+  (define-key dired-mode-map "^"
+    (function
+     (lambda nil (interactive) (dired-single-buffer "..")))))
+
+;; if dired's already loaded, then the keymap will be bound
+(if (boundp 'dired-mode-map)
+    ;; we're good to go; just add our bindings
+    (my-dired-init)
+  ;; it's not loaded yet, so add our bindings to the load-hook
+  (add-hook 'dired-load-hook 'my-dired-init))
+
+(global-auto-highlight-symbol-mode t)
+
+(defun nav-right ()
+  "Run nav-mode in a narrow window on the left side."
+  (interactive)
+  (require 'nav)
+  (if (nav-is-open)
+      (nav-quit)
+    (delete-other-windows)
+    (split-window-horizontally)
+    ;;(other-window 1)
+    (ignore-errors (kill-buffer nav-buffer-name))
+    (pop-to-buffer nav-buffer-name nil)
+    (set-window-dedicated-p (selected-window) t)
+    (nav-mode)
+    (linum-mode 0)
+    (when nav-resize-frame-p
+      (nav-resize-frame))))

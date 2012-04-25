@@ -28,11 +28,14 @@
           (setenv "DJANGO_SETTINGS_MODULE" "settings")
           (setenv "PYTHONPATH" project-dir)))))
 
+(defun flymake-create-temp-in-system-tempdir (filename prefix)
+  (make-temp-file (or prefix "flymake")))
+
 ;; Flymake for python
 (when (load "flymake" t) 
   (defun flymake-pyflakes-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
+                       'flymake-create-temp-in-system-tempdir))
            (local-file (file-relative-name
                         temp-file
                         (file-name-directory buffer-file-name))))
