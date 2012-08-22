@@ -30,9 +30,10 @@
              '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
-(defvar my-packages '(bm 
-                      tabbar 
-                      smex 
+(defvar my-packages '(bm
+                      tabbar
+                      smex
+                      nav
                       color-theme
                       dired-single
                       fold-dwim

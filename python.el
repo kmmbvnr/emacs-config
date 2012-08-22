@@ -87,3 +87,55 @@
        (cons 'show-fly-err-at-point post-command-hook)))
 
 (add-hook 'python-mode-hook 'flymake-find-file-hook)
+
+(defun py-insert-super-call ()
+  "Insert super method call at point"
+  (interactive)
+  (point-to-register 0)
+
+  ;; class name
+  (search-backward "class ")
+  (forward-char 6)
+  (set-mark-command nil)
+  (search-forward "(")
+  (backward-char 1)
+  (kill-ring-save (mark) (point))
+  (jump-to-register 0)
+
+  ;; insert class name
+  (insert "super(")
+  (yank)
+  (insert ", self).")
+
+  ;; func name
+  (point-to-register 0)
+  (search-backward "def ")
+  (forward-char 4)
+  (set-mark-command nil)
+  (search-forward "(")
+  (backward-char 1)
+  (kill-ring-save (mark) (point))
+  (jump-to-register 0)
+
+  ;; insert func name
+  (yank)
+  (insert "(")
+
+  ;; args
+  (point-to-register 0)
+  (kill-ring-save (point) (point))
+  (search-backward "def ")
+  (save-excursion ;; TODO fix if no params
+    (search-forward "self, ")
+    (set-mark-command nil)
+    (search-forward ")")
+    (backward-char 1)
+    (kill-ring-save (mark) (point)))
+  (jump-to-register 0)
+
+  ;; insert args
+  (yank)
+  (insert ")")
+)
+
+(global-set-key "\C-c\M-s" 'py-insert-super-call)
