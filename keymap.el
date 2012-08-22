@@ -56,4 +56,9 @@
     (when input-method
       (activate-input-method current))))
 
+(defadvice read-passwd (around my-read-passwd act)
+  (let ((local-function-key-map nil))
+    ad-do-it))
+
 (reverse-input-method 'russian-computer)
+
