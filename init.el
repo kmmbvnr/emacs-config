@@ -38,7 +38,8 @@
                       dired-single
                       fold-dwim
                       pony-mode
-                      go-mode))
+                      go-mode
+                      nxml-mode))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -66,4 +67,5 @@
 (load (concat config-dir "python.el"))
 (load (concat config-dir "keymap.el"))
 (load (concat config-dir "email.el"))
+(load (concat config-dir "xml.el"))
 
