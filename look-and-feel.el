@@ -9,6 +9,10 @@
   (or (eq system-type 'gnu/linux)
       (eq system-type 'linux))
   "Are we running on a GNU/Linux system?")
+(defconst macosp
+  (eq system-type 'darwin),
+  "Are we running in a MacOs?")
+
 
 (when win32p
   (setq w32-pass-lwindow-to-system nil
@@ -34,7 +38,15 @@
                            :underline nil :slant normal :weight normal 
                            :height 101 :width normal :foundry "unknown" 
                            :family "Liberation Mono"))))))
-
+(when macosp
+  (prefer-coding-system 'utf-8)
+  (custom-set-faces
+   '(default ((t (:inherit nil :stipple nil :background "beige" 
+                           :foreground "black" :inverse-video nil 
+                           :box nil :strike-through nil :overline nil 
+                           :underline nil :slant normal :weight normal 
+                           :height 121 :width normal :foundry "unknown" 
+                           :family "Menlo"))))))
 
 ;; Standard emacs functions
 (fset 'yes-or-no-p 'y-or-n-p)
