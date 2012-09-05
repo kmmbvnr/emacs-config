@@ -38,8 +38,7 @@
                       dired-single
                       fold-dwim
                       pony-mode
-                      go-mode
-                      nxml-mode))
+                      go-mode))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))

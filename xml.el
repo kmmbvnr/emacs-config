@@ -3,13 +3,20 @@
 http://www.emacswiki.org/cgi-bin/wiki/NxmlMode installed to do
 this.  The function inserts linebreaks to separate tags that have
 nothing but whitespace between them.  It then indents the markup
-by using nxml's indentation rules."
+by using nxml's indentation rules.
+
+http://stackoverflow.com/questions/12492/pretty-printing-xml-files-on-emacs
+"
   (interactive "r")
   (save-excursion
-      (nxml-mode)
-      (goto-char begin)
-      (while (search-forward-regexp "\>[ \\t]*\<" nil t) 
-        (backward-char) (insert "\n"))
-      (indent-region begin end))
-    (message "Ah, much better!"))
+    (goto-char begin)
+    ;; split <foo><foo> or </foo><foo>, but not <foo></foo>
+    (while (search-forward-regexp ">[ \t]*<[^/]" end t)
+      (backward-char 2) (insert "\n") (incf end))
+    ;; split <foo/></foo> and </foo></foo>
+    (goto-char begin)
+    (while (search-forward-regexp "<.*?/.*?>[ \t]*<" end t)
+      (backward-char) (insert "\n") (incf end))
+    (indent-region begin end nil))
+  (message "All indented!"))
 
