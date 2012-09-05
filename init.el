@@ -55,6 +55,7 @@
 (load (concat config-dir "session.el"))
 (load (concat config-dir "elisp/inhibit-clash-detection.el"))
 (load (concat config-dir "elisp/auto-highlight-symbol.el"))
+(load (concat config-dir "elisp/multi-web-mode.el"))
 
 ;; Customization
 (setq custom-file (concat config-dir "custom.el"))
@@ -66,5 +67,6 @@
 (load (concat config-dir "python.el"))
 (load (concat config-dir "keymap.el"))
 (load (concat config-dir "email.el"))
+(load (concat config-dir "web.el"))
 (load (concat config-dir "xml.el"))
 
