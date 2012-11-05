@@ -38,7 +38,9 @@
                       dired-single
                       fold-dwim
                       pony-mode
-                      go-mode))
+                      go-mode
+                      flymake-jshint
+                      flymake-csslint))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -56,6 +58,7 @@
 (load (concat config-dir "elisp/inhibit-clash-detection.el"))
 (load (concat config-dir "elisp/auto-highlight-symbol.el"))
 (load (concat config-dir "elisp/multi-web-mode.el"))
+(load (concat config-dir "elisp/sqlplus.el"))
 
 ;; Customization
 (setq custom-file (concat config-dir "custom.el"))
@@ -65,8 +68,8 @@
 (load (concat config-dir "look-and-feel.el"))
 (load (concat config-dir "compile.el"))
 (load (concat config-dir "python.el"))
+(load (concat config-dir "javascript.el"))
 (load (concat config-dir "keymap.el"))
 (load (concat config-dir "email.el"))
 (load (concat config-dir "web.el"))
 (load (concat config-dir "xml.el"))
-
