@@ -59,6 +59,7 @@
 (load (concat config-dir "elisp/auto-highlight-symbol.el"))
 (load (concat config-dir "elisp/multi-web-mode.el"))
 (load (concat config-dir "elisp/sqlplus.el"))
+(load (concat config-dir "elisp/plsql.el"))
 
 ;; Customization
 (setq custom-file (concat config-dir "custom.el"))
@@ -73,3 +74,5 @@
 (load (concat config-dir "email.el"))
 (load (concat config-dir "web.el"))
 (load (concat config-dir "xml.el"))
+(load (concat config-dir "oracle.el"))
+
