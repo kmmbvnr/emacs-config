@@ -4,7 +4,7 @@
 ;; having to separately hit C-x C-s is a waste of time
 (setq mode-compile-always-save-buffer-p t)
 ;; make the compile window stick at 12 lines tall
-(setq compilation-window-height 12)
+(setq compilation-window-height 20)
  
 ;; from enberg on #emacs
 ;; if the compilation has a zero exit code, 

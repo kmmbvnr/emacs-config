@@ -59,6 +59,7 @@
 (load (concat config-dir "elisp/auto-highlight-symbol.el"))
 (load (concat config-dir "elisp/multi-web-mode.el"))
 (load (concat config-dir "elisp/sqlplus.el"))
+(load (concat config-dir "elisp/protobuf-mode.el"))
 
 ;; Customization
 (setq custom-file (concat config-dir "custom.el"))

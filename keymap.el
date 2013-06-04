@@ -31,6 +31,10 @@
 (global-set-key [(f3)] 'flymake-goto-next-error)
 (global-set-key (kbd "C-c d") 'nav-right)
 
+(global-set-key (kbd "M-j")
+                (lambda ()
+                  (interactive)
+                  (join-line -1)))
 
 ;; Recode shortcuts in russian-layout
 (defun reverse-input-method (input-method)
