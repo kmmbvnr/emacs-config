@@ -28,21 +28,27 @@
           (setenv "DJANGO_SETTINGS_MODULE" "settings")
           (setenv "PYTHONPATH" project-dir)))))
 
+
+(require 'flymake-python-pyflakes)
+(add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
+(setq flymake-python-pyflakes-executable "flake8")
+
+
 (defun flymake-create-temp-in-system-tempdir (filename prefix)
   (make-temp-file (or prefix "flymake")))
 
 ;; Flymake for python
-(when (load "flymake" t) 
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-in-system-tempdir))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "pyflakes" (list local-file))))
+;; (when (load "flymake" t) 
+;;  (defun flymake-pyflakes-init ()
+;;    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+;;                       'flymake-create-temp-in-system-tempdir))
+;;           (local-file (file-relative-name
+;;                        temp-file
+;;                        (file-name-directory buffer-file-name))))
+;;      (list "pyflakes" (list local-file))))
 
-  (add-to-list 'flymake-allowed-file-name-masks 
-               '("\\.py\\'" flymake-pyflakes-init)))
+;; (add-to-list 'flymake-allowed-file-name-masks 
+;;             '("\\.py\\'" flymake-python-pyflakes-load))
 
 ;; Additional functionality that makes flymake error messages appear 
 ;; in the minibuffer when point is on a line containing a flymake 
@@ -86,7 +92,7 @@
   (set (make-local-variable 'post-command-hook) 
        (cons 'show-fly-err-at-point post-command-hook)))
 
-(add-hook 'python-mode-hook 'flymake-find-file-hook)
+;; (add-hook 'python-mode-hook 'flymake-find-file-hook)
 
 (defun py-insert-super-call ()
   "Insert super method call at point"

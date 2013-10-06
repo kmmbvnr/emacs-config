@@ -40,7 +40,9 @@
                       pony-mode
                       go-mode
                       flymake-jshint
-                      flymake-csslint))
+                      flymake-csslint
+                      flymake-python-pyflakes
+                      web-mode))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -63,6 +65,7 @@
 (load (concat config-dir "elisp/plsql.el"))
 (load (concat config-dir "elisp/go-mode-load.el"))
 (load (concat config-dir "elisp/go-flymake.el"))
+(load (concat config-dir "elisp/graphviz-dot-mode.el"))
 
 ;; Customization
 (setq custom-file (concat config-dir "custom.el"))

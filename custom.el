@@ -12,7 +12,12 @@
  '(blink-cursor-mode nil)
  '(bm-highlight-style (quote bm-highlight-only-fringe))
  '(c-basic-offset 4)
- '(c-default-style (quote ((c-mode . "bsd") (java-mode . "java") (awk-mode . "awk") (other . "gnu"))))
+ '(c-default-style
+   (quote
+    ((c-mode . "bsd")
+     (java-mode . "java")
+     (awk-mode . "awk")
+     (other . "gnu"))))
  '(calendar-week-start-day 1)
  '(column-number-mode t)
  '(compilation-ask-about-save nil)
@@ -24,6 +29,7 @@
  '(erc-autojoin-channels-alist (quote (("irc.freenide.net" "#django" "#emacs"))))
  '(erc-autojoin-mode t)
  '(erc-nick "kmmbvnr")
+ '(flymake-python-pyflakes-extra-arguments (quote ("--max-line-length=120")))
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(global-auto-revert-mode t)
  '(global-linum-mode t)
@@ -44,8 +50,11 @@
  '(mouse-avoidance-mode (quote exile) nil (avoid))
  '(nxml-child-indent 4)
  '(nxml-outline-child-indent 4)
+ '(python-skeleton-autoinsert t)
  '(python-use-skeletons t)
- '(recentf-exclude (quote ("^/su:" "^/sudo:" "^/ssh:" "ido.last$" "/Servers/")))
+ '(recentf-exclude
+   (quote
+    ("^/su:" "^/sudo:" "^/ssh:" "ido.last$" "/Servers/")))
  '(recentf-mode t)
  '(rng-nxml-auto-validate-flag nil)
  '(ruby-indent-level 4)

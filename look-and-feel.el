@@ -190,11 +190,28 @@
 
 ;; Do not load vc backends automaticall
 (eval-after-load "vc" '(remove-hook 'find-file-hooks 'vc-find-file-hook))
+
 (require 'dired-single)
+
+;; In dired, M-> and M-< never take me where I want to go.
+(defun dired-back-to-top ()
+  (interactive)
+  (beginning-of-buffer)
+  (dired-next-line 2))
+
+(defun dired-jump-to-bottom ()
+  (interactive)
+  (end-of-buffer)
+  (dired-next-line -1))
+
 (defun my-dired-init ()
   "Bunch of stuff to run for dired, either immediately or when it's
         loaded."
   ;; <add other stuff here>
+  (define-key dired-mode-map
+    (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
+  (define-key dired-mode-map
+    (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom)
   (define-key dired-mode-map [return] 'dired-single-buffer)
   (define-key dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
   (define-key dired-mode-map "^"
