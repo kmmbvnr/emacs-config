@@ -94,6 +94,8 @@
 
 
 ;; Color theme
+(require 'color-theme)
+(color-theme-initialize)
 (if window-system (color-theme-greiner) ;(color-theme-snow)
   (color-theme-arjen))
 

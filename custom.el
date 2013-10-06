@@ -31,6 +31,7 @@
  '(erc-nick "kmmbvnr")
  '(flymake-python-pyflakes-extra-arguments (quote ("--max-line-length=120")))
  '(fringe-mode (quote (nil . 0)) nil (fringe))
+ '(global-anzu-mode t)
  '(global-auto-revert-mode t)
  '(global-linum-mode t)
  '(hscroll-step 1)
@@ -79,6 +80,7 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "beige" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 101 :width normal :foundry "unknown" :family "Liberation Mono"))))
  '(ahs-face ((t (:background "Orange1" :foreground "black"))))
+ '(anzu-mode-line ((t (:foreground "black" :weight bold))))
  '(js2-error-face ((((class color) (background light)) (:background "LightPink"))))
  '(js2-external-variable-face ((t (:background "LightBlue2"))))
  '(js2-warning-face ((((class color) (background light)) (:background "LightBlue2"))))
